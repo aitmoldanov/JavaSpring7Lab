@@ -1,0 +1,78 @@
+[class^="item"] {
+    text-align: center;
+}
+.grid {
+    font-family: Calibri, monospace;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas:
+            "header header header header"
+            "menu menu menu menu"
+            "sidebar sidebar sidebar sidebar"
+            "footer footer footer footer";
+    grid-auto-flow: dense;
+    grid-gap: 5px;
+}
+.item1 {
+    grid-area: header;
+    text-align: center;
+}
+
+.item2 {
+    grid-area: menu;
+    background-color: darkslategray;
+    text-align: center;        }
+
+.item3 {
+    height: auto;
+    grid-area: sidebar;
+    text-align: center;
+}
+
+.item4 {
+    grid-area: footer;
+    height: 25px;
+    background-color: darkslategray;
+    text-align: center;
+}
+.item-body{
+
+}
+.login-form{
+    border: 2px solid gray;
+    border-radius: 5px
+}
+.blue-button {
+    width: 100%;
+    background-color: #5c68b8;
+    border-color: #5c68b8;
+    color: #fff;
+}
+
+.blue-button:enabled:hover,
+.blue-button:focus {
+    background-color: #0622d7;
+    border-color: #0622d7;
+}
+.label {
+    width:20%;
+    padding:4px;
+}
+
+.value {
+    width:80%;
+    padding:4px;
+}
+
+.grid {
+    width:100%;
+}
+
+.error {
+    color: red;
+}
+
+.outputLabel {
+    font-weight: bold;
+}

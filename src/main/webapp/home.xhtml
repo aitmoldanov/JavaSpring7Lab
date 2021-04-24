@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:th="https://www.thymeleaf.org">
+<h:head>
+    <title>Home</title>
+    <h:outputStylesheet name="style.css" library="css" />
+    <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+    <style type="text/css">
+        [class^="item"] {
+            text-align: center;
+        }
+        .grid {
+            font-family: Calibri, monospace;
+            display: grid;
+            width:100%;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, auto);
+            grid-template-areas:
+            "header header header header"
+            "menu menu menu menu"
+            "sidebar sidebar sidebar sidebar"
+            "footer footer footer footer";
+            grid-auto-flow: dense;
+            grid-gap: 5px;
+        }
+        .item1 {
+            grid-area: header;
+            background-color: darkslategray;
+            text-align: center;
+        }
+
+        .item2 {
+            grid-area: menu;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .item3 {
+            grid-area: sidebar;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .item4 {
+            grid-area: footer;
+            height: 25px;
+            background-color: darkslategray;
+            text-align: center;
+        }
+        h1{
+            font-family: 'Times New Roman', serif;
+            color: wheat;
+        }
+        .outputText{
+            font-family: 'Garamond', serif;
+            color: wheat;
+        }
+        .form{
+            position:absolute;
+            top:0;
+            right:0;
+            margin-top: 15px;
+            margin-right: 4px
+        }
+        .btn{
+            position: relative;
+            border: 3px solid rgb(96, 102, 38);
+            margin-bottom: 10px;
+            margin-top: 10px;
+            width: 150px;
+            background-color: #0f122d;
+            font-family: Calibri, monospace;
+            font-size: larger;
+            font-weight: bold;
+            color: #02b3b3;
+            height: 180px;
+            text-align: center;
+        }
+        .btn:hover {
+            border: 3px solid #02b3b3;
+            background-color: #000000;
+            color: wheat;
+            cursor: pointer;
+        }
+        .btn .btnPanelGrid{
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            background: black;
+            color: #02b3b3;
+            margin: auto;
+            font-family: sans-serif;
+            opacity: 0;
+            visibility: hidden;
+            -webkit-transition: visibility 0s, opacity 0.5s linear;
+            transition: visibility 0s, opacity 0.5s linear;
+        }
+
+        /* Hover on Parent Container */
+        .btn:hover{
+            cursor: pointer;
+        }
+
+        .btn:hover .btnPanelGrid{
+            width: 140px;
+            padding: 6px 6px;
+            visibility: visible;
+            opacity: 0.6;
+        }
+
+    </style>
+</h:head>
+
+<h:body styleClass="grid">
+
+    <p:outputPanel styleClass="item1">
+        <h1>LIBRARY MANAGEMENT SYSTEM</h1>
+        <h:form styleClass="form" style="" rendered="#{userBean.logged}">
+            <h:outputText styleClass="outputText" value="Hi: "/> <h:outputLabel styleClass="outputText" value="#{userBean.authenticatedUserFullName}"/><h:outputText value=" "/>
+            <p:commandButton actionListener="#{userBean.logout()}" style="width: 25px; height: 30px; color: darkslategray" icon="pi pi-sign-out" update="@this" ajax="false" />
+        </h:form>
+    </p:outputPanel>
+    <p:outputPanel styleClass="item2"></p:outputPanel>
+    <p:outputPanel styleClass="item3">
+
+        <a href="${pageContext.request.contextPath}/item">
+            <button class="btn">
+                <img class="icon-desktop" src="resources/images/icon/search.png" alt="search"/>
+                <h:panelGrid styleClass="btnPanelGrid">SEARCH</h:panelGrid>
+            </button>
+        </a>
+        <a href="${pageContext.request.contextPath}/login">
+            <button class="btn">
+                <img class="icon-desktop" src="resources/images/icon/login.png" alt="login"/>
+                <h:panelGrid styleClass="btnPanelGrid">LOG IN</h:panelGrid>
+            </button>
+        </a>
+        <a href="${pageContext.request.contextPath}/register">
+            <button class="btn" onclick="register">
+                <img class="icon-desktop" src="resources/images/icon/register.png" alt="search"/>
+                <h:panelGrid styleClass="btnPanelGrid">REGISTER</h:panelGrid>
+            </button>
+        </a>
+
+
+    </p:outputPanel>
+    <p:outputPanel styleClass="item4"></p:outputPanel>
+</h:body>
+</html>
+
+

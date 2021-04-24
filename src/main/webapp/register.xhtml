@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Register</title>
+    <h:outputStylesheet name="style.css" library="css" />
+    <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+    <style type="text/css">
+        [class^="item"] {
+            text-align: center;
+        }
+        .grid {
+            font-family: Calibri, monospace;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, auto);
+            grid-template-areas:
+            "header header header header"
+            "menu menu menu menu"
+            "sidebar sidebar sidebar sidebar"
+            "footer footer footer footer";
+            grid-auto-flow: dense;
+            grid-gap: 5px;
+        }
+        .item1 {
+            grid-area: header;
+            background-color: darkslategray;
+            text-align: center;
+        }
+
+        .item2 {
+            grid-area: menu;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .item3 {
+            grid-area: sidebar;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .item4 {
+            grid-area: footer;
+            height: 25px;
+            background-color: darkslategray;
+            text-align: center;
+        }
+        .label {
+            width:20%;
+            padding:4px;
+        }
+
+        .value {
+            width:80%;
+            padding:4px;
+        }
+        .error {
+            color: red;
+        }
+
+        .outputLabel {
+            font-weight: bold;
+        }
+        h1{
+            font-family: 'Times New Roman', serif;
+            color: wheat;
+        }
+        .MenuItem{
+            width: 200px;
+        }
+    </style>
+</h:head>
+
+<h:body styleClass="grid">
+
+    <p:outputPanel styleClass="item1"><h1>LIBRARY MANAGEMENT SYSTEM</h1></p:outputPanel>
+    <p:outputPanel styleClass="item2">
+        <h:form>
+            <p:tabMenu activeIndex="3" style="text-align: center">
+                <p:menuitem value="Home" icon="pi pi-caret-right" url="home" styleClass="MenuItem">
+                    <f:param name="i" value="0" />
+                </p:menuitem>
+                <p:menuitem value="Item" icon="pi pi-caret-right" url="item" styleClass="MenuItem">
+                    <f:param name="i" value="1" />
+                </p:menuitem>
+                <p:menuitem value="Login" icon="pi pi-caret-right" url="login" styleClass="MenuItem" action="#{userBean.getAuthenticatedUserInfo()}">
+                    <f:param name="i" value="2" />
+                </p:menuitem>
+                <p:menuitem value="Register" icon="pi pi-caret-right" url="#" styleClass="MenuItem" action="#{userBean.getJmsMessages()}">
+                    <f:param name="i" value="3" />
+                </p:menuitem>
+            </p:tabMenu>
+        </h:form>
+    </p:outputPanel>
+    <p:outputPanel styleClass="item3">
+        <p:outputPanel styleClass="item-body">
+            <h:form>
+
+                <p:growl id="growl" sticky="true" showDetail="true"/>
+
+                <p:wizard flowListener="#{registerBean.onFlowProcess}">
+                    <p:tab id="contact" title="Login">
+                        <p:panel header="Contact Information" style="width: 1000px">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Email: *" />
+                                <p:inputText label="Email" value="#{registerBean.email}" required="true"/>
+                                <h:outputText value="Password: *" />
+                                <p:password label="Password" value="#{registerBean.password}" required="true"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="personal" title="Personal">
+                        <p:panel header="Personal Details" style="width: 1000px">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Fullname: *" />
+                                <p:inputText  label="fullName" value="#{registerBean.fullName}" required="true"/>
+                                <h:outputText value="Date of birth: *" />
+                                <p:inputText label="birthDate" value="#{registerBean.birthDate}"/>
+                                <!-- <h:outputText value="Phone: " />
+                                <p:inputText />-->
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="address" title="Address">
+                        <p:panel header="Address Details" style="width: 1000px">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Address: " />
+                                <p:inputText label="address" value="#{registerBean.address}"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+
+                    <p:tab id="confirm" title="Confirmation">
+                        <p:panel header="Confirmation" style="width: 1000px">
+                            <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="Email: " />
+                                    <h:outputText styleClass="outputLabel" value="#{registerBean.email}"/>
+
+                                    <h:outputText value="Password " />
+                                    <h:outputText styleClass="outputLabel" value="#{registerBean.password}"/>
+
+
+                                    <h:outputText />
+                                    <h:outputText />
+                                </h:panelGrid>
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="Fullname: " />
+                                    <h:outputText styleClass="outputLabel" value="#{registerBean.fullName}"/>
+                                    <h:outputText value="Date of birth: " />
+                                    <h:outputText styleClass="outputLabel" value="#{registerBean.birthDate}"/>
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="Address: " />
+                                    <h:outputText styleClass="outputLabel" value="#{registerBean.address}"/>
+                                </h:panelGrid>
+                            </h:panelGrid>
+
+                            <p:commandButton action="#{registerBean.addUser}" value="Submit" update="growl" process="@this" ajax="false" icon="pi pi-check"/>
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+
+            </h:form>
+        </p:outputPanel>
+    </p:outputPanel>
+    <p:outputPanel styleClass="item4"></p:outputPanel>
+</h:body>
+</html>
